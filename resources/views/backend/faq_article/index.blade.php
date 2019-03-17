@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', 'FAQ文章')
 
-    @include('components.breadcrumb', ['name' => 'FAQ文章'])
+@section('content_header')
+    <h1>FAQ文章</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.faq.article.create') }}" class="btn btn-primary ml-auto">添加</a>
         </div>

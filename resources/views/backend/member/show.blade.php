@@ -1,10 +1,13 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '会员详情')
 
-    @include('components.breadcrumb', ['name' => '会员详情'])
+@section('content_header')
+    <h1>会员详情</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+    <div class="row">
         <div class="col-sm-12 mb-3">
             <a href="{{ route('backend.member.index') }}" class="btn btn-primary ml-auto">返回列表</a>
         </div>

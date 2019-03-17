@@ -1,10 +1,13 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '编辑角色')
 
-    @include('components.breadcrumb', ['name' => '编辑角色'])
+@section('content_header')
+    <h1>编辑角色</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.administrator_role.index') }}" class="btn btn-primary ml-auto">返回列表</a>
         </div>

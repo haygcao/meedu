@@ -1,10 +1,13 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '全站配置')
 
-    @include('components.breadcrumb', ['name' => '全站配置'])
+@section('content_header')
+    <h1>全站配置</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+    <div class="row">
         <div class="col-sm-12">
 
             <form action="" method="post">

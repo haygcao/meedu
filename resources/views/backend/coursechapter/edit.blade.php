@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '编辑课程章节')
 
-    @include('components.breadcrumb', ['name' => '编辑课程章节'])
+@section('content_header')
+    <h1>编辑课程章节</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.coursechapter.index', $one->course->id) }}" class="btn btn-primary ml-auto">返回列表</a>
         </div>

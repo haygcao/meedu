@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '友情链接')
 
-    @include('components.breadcrumb', ['name' => '友情链接'])
+@section('content_header')
+    <h1>友情链接</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.link.create') }}" class="btn btn-primary ml-auto">添加</a>
         </div>

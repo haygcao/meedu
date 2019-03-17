@@ -1,8 +1,12 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '添加课程')
 
-    @include('components.breadcrumb', ['name' => '添加课程'])
+@section('content_header')
+    <h1>添加课程</h1>
+@endsection
+
+@section('content')
 
     <form action="" method="post">
         @csrf

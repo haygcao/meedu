@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '订单列表')
 
-    @include('components.breadcrumb', ['name' => '订单列表'])
+@section('content_header')
+    <h1>订单列表</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <form action="" method="get">
                 <div class="form-group">

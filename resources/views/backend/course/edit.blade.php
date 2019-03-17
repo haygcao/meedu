@@ -1,9 +1,12 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '编辑课程')
 
-    @include('components.breadcrumb', ['name' => '编辑课程'])
+@section('content_header')
+    <h1>编辑课程</h1>
+@endsection
 
+@section('content')
     <form action="" method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">

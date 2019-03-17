@@ -1,10 +1,13 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '管理员列表')
 
-    @include('components.breadcrumb', ['name' => '管理员列表'])
+@section('content_header')
+    <h1>管理员列表</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.administrator.create') }}" class="btn btn-primary ml-auto">添加</a>
         </div>

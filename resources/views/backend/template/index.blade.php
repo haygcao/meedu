@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '模板')
 
-    @include('components.breadcrumb', ['name' => '模板'])
+@section('content_header')
+    <h1>模板</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         @foreach($templates as $template)
         <div class="col-sm-4">
             <div class="card">

@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '章节列表')
 
-    @include('components.breadcrumb', ['name' => '章节列表'])
+@section('content_header')
+    <h1>章节列表</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.book.chapter.create', [$book->id]) }}" class="btn btn-primary ml-auto">添加</a>
         </div>

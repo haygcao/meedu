@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '视频')
 
-    @include('components.breadcrumb', ['name' => '视频'])
+@section('content_header')
+    <h1>视频</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.video.create') }}" class="btn btn-primary ml-auto">添加</a>
         </div>

@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '插件')
 
-    @include('components.breadcrumb', ['name' => '插件'])
+@section('content_header')
+    <h1>插件</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <table class="table">
                 <thead>

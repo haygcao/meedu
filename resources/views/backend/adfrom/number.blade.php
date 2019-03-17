@@ -1,8 +1,12 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '推广链接')
 
-    @include('components.breadcrumb', ['name' => '推广链接'])
+@section('content_header')
+    <h1>推广链接</h1>
+@endsection
+
+@section('content')
 
     <div class="row row-cards">
         <div class="col-sm-12">

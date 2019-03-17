@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '订阅推送')
 
-    @include('components.breadcrumb', ['name' => '订阅推送'])
+@section('content_header')
+    <h1>订阅推送</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
        <div class="col-sm-12">
            <div class="alert alert-warning">
                所有订阅过本站的邮箱都将收到邮件！

@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', $course->title.'的课程章节')
 
-    @include('components.breadcrumb', ['name' => $course->title.'的课程章节'])
+@section('content_header')
+    <h1>{{$course->title}}的课程章节</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12 mb-2">
             <div class="btn-group justify-content-end">
                 <a href="{{route('backend.course.index')}}" class="btn btn-info">返回课程列表</a>

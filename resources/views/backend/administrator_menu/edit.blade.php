@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '添加菜单')
 
-    @include('components.breadcrumb', ['name' => '添加菜单'])
+@section('content_header')
+    <h1>添加菜单</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.administrator_menu.index') }}" class="btn btn-primary ml-auto">返回菜单</a>
         </div>

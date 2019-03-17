@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '云插件')
 
-    @include('components.breadcrumb', ['name' => '云插件'])
+@section('content_header')
+    <h1>云插件</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <table class="table">
                 <thead>
@@ -40,7 +44,7 @@
                             @endif
                         </td>
                     </tr>
-                    @empty
+                @empty
                     <tr>
                         <td colspan="4" class="text-center">
                             暂无插件，前去挑选 <a href="https://meedu.vip" target="_blank">应用商店</a>
