@@ -1,7 +1,6 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/auth.css') }}">
     @yield('css')
 @stop
@@ -46,17 +45,4 @@
         </div>
         <!-- /.login-box-body -->
     </div><!-- /.login-box -->
-
-    <script crossorigin="anonymous" integrity="sha384-RIQuldGV8mnjGdob13cay/K1AJa+LR7VKHqSXrrB5DPGryn4pMUXRLh92Ev8KlGF" src="https://lib.baomitu.com/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script>
-        @if(get_first_flash('success'))
-        swal("成功", "{{get_first_flash('success')}}", "success");
-        @endif
-        @if(get_first_flash('warning'))
-        swal("警告", "{{get_first_flash('warning')}}", "warning");
-        @endif
-        @if(get_first_flash('error'))
-        swal("错误", "{{get_first_flash('error')}}", "error");
-        @endif
-    </script>
 @stop

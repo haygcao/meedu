@@ -28,17 +28,3 @@
     </div>
 
 @endsection
-
-@section('js')
-    <script>
-        var announcement = @json($announcement);
-        new Vue({
-            el: '#app',
-            data: function () {
-                return {
-                    announcement: announcement
-                }
-            }
-        });
-    </script>
-@endsection

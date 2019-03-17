@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '添加VIP')
 
-    @include('components.breadcrumb', ['name' => '添加VIP'])
+@section('content_header')
+    <h1>添加VIP</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.role.index') }}" class="btn btn-primary ml-auto">返回列表</a>
         </div>

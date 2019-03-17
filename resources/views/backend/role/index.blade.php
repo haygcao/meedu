@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', 'VIP会员')
 
-    @include('components.breadcrumb', ['name' => 'VIP会员'])
+@section('content_header')
+    <h1>VIP会员</h1>
+@endsection
 
-    <div class="row row-cards">
+@section('content')
+
+    <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('backend.role.create') }}" class="btn btn-primary ml-auto">添加</a>
         </div>
@@ -34,7 +38,6 @@
                     <td>{{$role->updated_at}}</td>
                     <td>
                         <a href="{{route('backend.role.edit', $role)}}" class="btn btn-warning btn-sm">编辑</a>
-                        @include('components.backend.destroy', ['url' => route('backend.role.destroy', $role)])
                     </td>
                 </tr>
                     @empty
