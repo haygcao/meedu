@@ -1,11 +1,15 @@
-@extends('layouts.backend')
+@extends('adminlte::page')
 
-@section('body')
+@section('title', '主面板')
 
-    @include('components.breadcrumb', ['name' => '主面板'])
+@section('content_header')
+    <h1>主面板</h1>
+@stop
+
+@section('content')
 
     <div class="row row-cards">
-        <div class="col-6 col-sm-4 col-lg-4">
+        <div class="col-sm-4 col-lg-4">
             <div class="card">
                 <div class="card-body p-3 text-center">
                     <div class="h1 m-0">{{$todayRegisterUserCount}}</div>
@@ -13,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-sm-4 col-lg-4">
+        <div class="col-sm-4 col-lg-4">
             <div class="card">
                 <div class="card-body p-3 text-center">
                     <div class="h1 m-0">{{$todayPaidNum}}</div>
@@ -21,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-sm-4 col-lg-4">
+        <div class="col-sm-4 col-lg-4">
             <div class="card">
                 <div class="card-body p-3 text-center">
                     <div class="h1 m-0">{{$todayPaidSum}}</div>
