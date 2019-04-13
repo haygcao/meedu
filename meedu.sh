@@ -95,7 +95,7 @@ notice(){
     green "=================================================="
     white "以下内容必须一步步操作"
     greenbg "等待数据库完成初始化，等待约20s"
-    sleep 22s
+    sleep 10s
     yellow "创建软链接"
     docker-compose exec app php artisan storage:link
     sleep 3s
