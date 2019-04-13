@@ -7,7 +7,7 @@
 bash <(curl -L -s https://raw.githubusercontent.com/Baiyuetribe/meedu/master/meedu.sh)
 ```
 
-![](https://ww1.sinaimg.cn/large/007i4MEmgy1g213xuqd8cj30lw0g4751.jpg)
+![](https://ww1.sinaimg.cn/large/007i4MEmgy1g21cyyxpvgj32gs2gsh7e.jpg)
 
 ## 版本介绍
 
