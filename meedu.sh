@@ -1,10 +1,10 @@
 #!/bin/bash                                                                                               
 #===================================================================#
-#   System Required:  CentOS 7                                 #
-#   Description: Install rrshare for CentOS7 #
+#   System Required:  CentOS 7                                      #
+#   Description: Install rrshare for CentOS7                        #
 #   Author: Azure <2894049053@qq.com>                               #
-#   github: @baiyutribe <https://github.com/baiyuetribe>                     #
-#   Blog:  佰阅部落 https://baiyue.one                           #
+#   github: @baiyutribe <https://github.com/baiyuetribe>            #
+#   Blog:  佰阅部落 https://baiyue.one                               #
 #===================================================================#
 #
 #  .______        ___       __  ____    ____  __    __   _______      ______   .__   __.  _______ 
@@ -94,15 +94,20 @@ notice(){
     green "主程序已搭建完毕，让我们来完成最后几步，之后就可以访问了"
     green "=================================================="
     white "以下内容必须一步步操作"
+    greenbg "等待数据库完成初始化，等待约20s"
+    sleep 22s
+    yellow "创建软链接"
+    docker-compose exec app php artisan storage:link
+    sleep 3s
     yellow "安装数据表"
     docker-compose exec app php artisan migrate   
-    sleep 15s
+    sleep 10s
     yellow "初始化系统权限"
     docker-compose exec app php artisan install role    
-    sleep 15s
+    sleep 8s
     yellow "初始化后台菜单"
     docker-compose exec app php artisan install backend_menu   
-    sleep 10s
+    sleep 6s
     yellow "生成安装锁"
     docker-compose exec app php artisan install:lock  
     yellow "定时任务"
@@ -111,17 +116,17 @@ notice(){
     yellow "开启队列监听器"
     yum install -y python-setuptools
     easy_install supervisor 
-    echo "
-    [program:meedu]
-    process_name=%(program_name)s_%(process_num)02d
-    command=cd /opt/meedu && docker-compose exec php artisan queue:work --sleep=3 --tries=3
-    autostart=true
-    autorestart=true
-    user=root
-    numprocs=4
-    redirect_stderr=true
-    stdout_logfile=opt/meedu/storage/logs/supervisor.log
-    " > /etc/supervisor/conf.d/meedu.conf
+cat > /etc/supervisor/conf.d/meedu.conf <<-EOF
+[program:meedu]
+process_name=%(program_name)s_%(process_num)02d
+command=cd /opt/meedu && docker-compose exec php artisan queue:work --sleep=3 --tries=3
+autostart=true
+autorestart=true
+user=root
+numprocs=4
+redirect_stderr=true
+stdout_logfile=opt/meedu/storage/logs/supervisor.log
+EOF
     greenbg "队列监听配置完成。开始重启"
     supervisorctl reread
     supervisorctl update
@@ -153,9 +158,9 @@ install_main(){
     blue "获取配置文件"
     mkdir -p /opt/meedu && cd /opt/meedu
     rm -f docker-compose.yml  
-    wget https://github.com/baiyuetribe/meedu/raw/master/docker-compose.yml      
+    wget https://raw.githubusercontent.com/Baiyuetribe/meedu/master/docker-compose.yml      
     blue "配置文件获取成功"
-    sleep 3s
+    sleep 2s
     white "请仔细填写参数，部署完毕会反馈已填写信息"
     green "访问端口：如果想通过域名访问，请设置80端口，其余端口可随意设置"
     read -p "请输入访问端口：" port
@@ -171,7 +176,7 @@ install_main(){
         greenbg "开始安装meedu1.0版本"
         sed -i "s/数据库密码/$rootpwd/g" /opt/meedu/docker-compose.yml
         sed -i "s/版本号/1.0/g" /opt/meedu/docker-compose.yml
-        sed -i "s/"访问端口/"$port /g" /opt/meedu/docker-compose.yml
+        sed -i "s/"访问端口/"$port/g" /opt/meedu/docker-compose.yml
         greenbg "已完成配置部署"
         greenbg "程序将下载镜像，请耐心等待下载完成"
         cd /opt/meedu
@@ -233,14 +238,14 @@ start_menu(){
     greenbg "==============================================================="
     greenbg "简介：meedu一键安装脚本                                          "
     greenbg "系统：Centos7、Ubuntu等                                         "
-    greenbg "脚本作者：Azure                                                     "
-    greenbg "程序开发者：小腾 Github:Qsnh/meedu                                           "
+    greenbg "脚本作者：Azure                                                 "
+    greenbg "程序开发者：小腾 Github:Qsnh/meedu                               "
     greenbg "网站： https://baiyue.one                                       "
     greenbg "主题：专注分享优质web资源                                        "
     greenbg "Youtube/B站： 佰阅部落                                          "
     greenbg "==============================================================="
     echo
-    yellow "使用前提：脚本会自动安装docker，国外服务器搭建只需30s~1min"
+    yellow "使用前提：脚本会自动安装docker，国外服务器搭建只需1min~2min"
     yellow "国内服务器下载镜像稍慢，请耐心等待"
     blue "备注：非80端口可以用caddy反代，自动申请ssl证书，到期自动续期"
     echo
