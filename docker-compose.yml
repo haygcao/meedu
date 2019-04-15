@@ -1,0 +1,67 @@
+version: '3.1'
+services:
+
+  # The Application
+  app:
+    image: "baiyuetribe/meedu:appdev"
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    environment:
+      - "DB_PASSWORD=baiyue.one"
+    networks:
+        - frontend
+        - backend        
+    depends_on:
+        - mysql
+  # The Web Server
+  web:
+    image: "baiyuetribe/meedu:webdev"
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    volumes_from:
+      - app    
+    ports:
+      - 2025:80
+    networks:
+        - frontend      
+    depends_on:
+        - app
+  # The Database
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /opt/card/mysql:/var/lib/mysql
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "MYSQL_DATABASE=meedu"
+      - "MYSQL_ROOT_PASSWORD=baiyue.one"
+    ports:
+        - "3306:3306"
+    networks:
+        - backend 
+  redis:
+    image: redis:4.0.9-alpine
+    networks:
+      - frontend
+      - backend  
+    restart: unless-stopped
+    ports:
+        - "6379:6379"  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    depends_on:
+        - mysql
+    environment:
+        PMA_HOST: mysql
+        TZ: 'Asia/Shanghai'
+    networks:
+        - backend                
+        
+networks:
+    frontend:
+    backend:  
+ 
