@@ -163,15 +163,18 @@ install_main(){
     sleep 2s
     white "请仔细填写参数，部署完毕会反馈已填写信息"
     green "访问端口：如果想通过域名访问，请设置80端口，其余端口可随意设置"
-    read -p "请输入访问端口：" port
+    read -e -p "请输入访问端口(默认端口2020)：" port
+    [[ -z "${port}" ]] && port="2020"
     green "设置数据库ROOT密码"
-    read -p "请输入ROOT密码：" rootpwd
+    read -e -p "请输入ROOT密码(默认baiyue.one)：" rootpwd
+    [[ -z "${rootpwd}" ]] && rootpwd="baiyue.one"  
     green "请选择安装版本"
     yellow "1.[meedu1.0](稳定版)"
     yellow "2.[meedu20190412](开发版)"
     yellow "3.[meedu-dev]（开发版，同步meedu官网最新git分支）"
     echo
-    read -p "请输入数字[1~3]:" vnum
+    read -e -p "请输入数字[1~3](默认1)：" vnum
+    [[ -z "${vnum}" ]] && vnum="1" 
 	if [[ "${vnum}" == "1" ]]; then
         greenbg "开始安装meedu1.0版本"
         sed -i "s/数据库密码/$rootpwd/g" /opt/meedu/docker-compose.yml
@@ -236,9 +239,9 @@ start_menu(){
   ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝                                                            
     "
     greenbg "==============================================================="
-    greenbg "简介：meedu一键安装脚本                                          "
+    greenbg "简介：MeEdu一键安装脚本                                          "
     greenbg "系统：Centos7、Ubuntu等                                         "
-    greenbg "脚本作者：Azure                                                 "
+    greenbg "脚本作者：Azure  QQ群：635925514                                               "
     greenbg "程序开发者：小腾 Github:Qsnh/meedu                               "
     greenbg "网站： https://baiyue.one                                       "
     greenbg "主题：专注分享优质web资源                                        "
