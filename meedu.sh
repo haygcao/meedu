@@ -134,7 +134,6 @@ EOF
     greenbg "正在重启meedu"
     restart_meedu
     sleep 10s
-    notice2
 }
 
 notice2(){
@@ -148,10 +147,30 @@ notice2(){
     green " 网页数据位置： /opt/meedu/data"
     green "---------------------------"
     white "其他信息"
-    white "已配置的端口：$port  数据库root密码：$pwd "
+    white "已配置的端口：$port  数据库root密码：$rootpwd "
     green "=================================================="
     white "开发者：小腾   Dcocker by 佰阅部落  "
     white "项目地址： https://github.com/Qsnh/meedu"
+}
+
+notice3(){
+    greenbg "初始化管理员"
+    docker-compose exec app php artisan install administrator    #初始化管理员，安装提示输入管理员的账号和密码
+    green "=================================================="
+    green "搭建成功，现在您可以直接访问了"
+    green "---------------------------"
+    green " 首页地址： http://ip:$port"
+    green " 管理员后台地址：http://ip:$port/backend/login"
+    green " 主机数据绝对路径： /opt/meedu"
+    green " 源码编辑器 http://ip:899  编辑器内路径/var/www/meedu"
+    green "---------------------------"
+    white "其他信息"
+    white "已配置的端口：$port  数据库root密码：$rootpwd "
+    greenbg "一键脚本说明文档： https://baiyue.one/archives/479.html"
+    green "=================================================="
+    white "开发者：小腾   Dcocker by 佰阅部落  "
+    white "项目地址： https://github.com/Qsnh/meedu"
+
 }
 # 开始安装meedu
 install_main(){
@@ -169,9 +188,9 @@ install_main(){
     read -e -p "请输入ROOT密码(默认baiyue.one)：" rootpwd
     [[ -z "${rootpwd}" ]] && rootpwd="baiyue.one"  
     green "请选择安装版本"
-    yellow "1.[meedu1.0](稳定版)"
+    yellow "1.[meedu1.0](稳定版-此版不支持源码编辑)"
     yellow "2.[meedu20190412](开发版)"
-    yellow "3.[meedu-dev]（开发版，同步meedu官网最新git分支）"
+    yellow "3.[meedu-dev]（开发版，同步meedu官网最新git分支-支持源码编辑）"
     echo
     read -e -p "请输入数字[1~3](默认1)：" vnum
     [[ -z "${vnum}" ]] && vnum="1" 
@@ -186,6 +205,7 @@ install_main(){
         greenbg "首次启动会拉取镜像，国内速度比较慢，请耐心等待完成"
         docker-compose up -d
         notice
+        notice2
 	elif [[ "${vnum}" == "2" ]]; then
         greenbg "开始安装meedu20190412版本"
         sed -i "s/数据库密码/$rootpwd/g" /opt/meedu/docker-compose.yml
@@ -197,12 +217,37 @@ install_main(){
         greenbg "首次启动会拉取镜像，国内速度比较慢，请耐心等待完成"
         docker-compose up -d
         notice
+        notice2
     elif [[ "${vnum}" == "3" ]]; then
         white "项目正在路上。。。"
-        white ":)"
+        meedu_master
+        notice
+        notice3
 	fi   
    
 }
+
+# 初始化meedu程序
+meedu_master(){
+    rm -rf /opt/meedu && cd /opt
+    git clone -b master https://github.com/Qsnh/meedu.git
+    cd /opt/meedu 
+    rm -f docker-compose.yml   
+    git clone -b docker https://github.com/Baiyuetribe/meedu.git && mv meedu/* . && rm -rf meedu
+    sed -i "s/baiyue.one/$rootpwd/g" docker-compose.yml
+    sed -i "7s/"80:80/"$port:80/" docker-compose.yml
+    sed -i "s/127.0.0.1/mysql/g" .env.example
+    sed -i "s/DB_PASSWORD=123456/DB_PASSWORD=$rootpwd/g" .env.example
+    cp .env.example .env
+    chmod -R a+w+r storage
+    chmod -R a+w+r bootstrap/cache    
+    greenbg "本地初始化完成"
+    cd /opt/meedu
+    redbg "开始启动服务，首次启动会拉取镜像，请耐心等待"
+    docker-compose up -d    
+}
+
+
 
 # 停止服务
 stop_meedu(){
