@@ -1,53 +1,40 @@
 version: '3.1'
 services:
-
-  # The Application
-  app:
-    image: "baiyuetribe/meedu:app版本号"
-    environment:
-      - "DB_PASSWORD=数据库密码"
-    networks:
-        - frontend
-        - backend
-    links:
-        - redis
-    depends_on:
-        - mysql
-  # The Web Server
-  web:
-    image: "baiyuetribe/meedu:web版本号"
-    working_dir: /var/www
-    ports:
-      - 访问端口:80
-    networks:
-        - frontend
-    links:
-        - redis            
-    depends_on:
-        - app
-  # The Database
-  mysql:
-    image: mysql:5.7
-    volumes:
-      - /opt/meedu/mysql:/var/lib/mysql
-    environment:
-      - "TZ=Asia/Shanghai"
-      - "MYSQL_DATABASE=meedu"
-      - "MYSQL_ROOT_PASSWORD=数据库密码"
-    ports:
-        - "3306:3306"
-    networks:
-        - backend 
-  redis:
-    image: redis:4.0.9-alpine
-    networks:
-      - frontend
-      - backend  
-    restart: unless-stopped
-    ports:
-        - "6379:6379"        
-        
+    meedu:
+        image: "baiyuetribe/meedu"
+        restart: always
+        container_name: meedu         
+        networks:
+            - frontend
+            - backend
+        ports:
+          - 3003:80 
+        volumes:
+          - /opt/meedu:/meedu          
+        depends_on:
+          - mysql
+    mysql:
+        image: "mysql:5.6"
+        restart: always
+        environment:
+          TZ: 'Asia/Shanghai'
+          MYSQL_DATABASE: meedu
+          MYSQL_ROOT_PASSWORD: 123456
+        volumes:
+          - /opt/meedu/mysql:/var/lib/mysql
+        networks:
+            - backend
+    kodexplorer:
+        image: baiyuetribe/kodexplorer
+        restart: always
+        ports:
+          - 999:80
+        volumes:
+          - /opt/meedu:/code
+        networks:
+          - backend 
+        depends_on:
+          - meedu                
 networks:
     frontend:
-    backend:  
- 
+    backend:
