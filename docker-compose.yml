@@ -10,7 +10,7 @@ services:
         ports:
           - 3003:80 
         volumes:
-          - /opt/meedu:/meedu          
+          - /opt/meedu/code:/meedu          
         depends_on:
           - mysql
     mysql:
@@ -30,7 +30,7 @@ services:
         ports:
           - 999:80
         volumes:
-          - /opt/meedu:/code
+          - /opt/meedu/:/code
         networks:
           - backend 
         depends_on:

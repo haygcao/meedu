@@ -130,7 +130,7 @@ notice2(){
     green " 文件管理器：http://ip:999"
     green "---------------------------"
     white "其他信息"
-    white "网页源文件路径：/opt/meedu"
+    white "网页源文件路径：/opt/meedu/code"
     white "数据库存储路径：/opt/meedu/mysql"
     green "=================================================="
     white "Dcocker by 佰阅部落  https://baiyue.one"
