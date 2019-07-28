@@ -11,6 +11,7 @@ bash <(curl -L -s https://raw.githubusercontent.com/Baiyuetribe/meedu/master/mee
 
 ## 版本介绍
 
+Release v1.1.2 - Fixed:页面加速导致的支付界面二维码无法支付
 
 ## 功能介绍
 
